@@ -5,6 +5,6 @@ services:
     image: hashicorp/terraform:1.6
     volumes:
       - ./:/work
-    working_dir: /work
+    working_dir: /work/modules/static_web
     tty: true
     stdin_open: true
