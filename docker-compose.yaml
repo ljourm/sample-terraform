@@ -5,6 +5,8 @@ services:
     image: hashicorp/terraform:1.6
     volumes:
       - ./:/work
+    env_file:
+      - .env
   pike:
     image: jameswoolfenden/pike
     volumes:
