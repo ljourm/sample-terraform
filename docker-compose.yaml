@@ -5,6 +5,7 @@ services:
     image: hashicorp/terraform:1.6
     volumes:
       - ./:/work
-    working_dir: /work
-    tty: true
-    stdin_open: true
+  pike:
+    image: jameswoolfenden/pike
+    volumes:
+      - ./:/work
