@@ -11,3 +11,11 @@ services:
     image: jameswoolfenden/pike
     volumes:
       - ./:/work
+  tflint:
+    build:
+      context: .
+      dockerfile: ./docker/tflint/Dockerfile
+    image: sample-terraform-tflint
+    volumes:
+      - ./:/work
+    working_dir: /work

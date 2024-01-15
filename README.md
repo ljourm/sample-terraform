@@ -23,3 +23,7 @@ $ docker-compose run --rm -w $WORK_DIR terraform apply
 ```sh
 $ docker-compose run --rm pike scan -d $WORK_DIR
 ```
+
+```sh
+$ docker-compose run --rm tflint --recursive
+```
