@@ -11,13 +11,13 @@ $ cp .env.sample .env
 
 ```sh
 # e.g.
-WORK_DIR=/work/env/stg
+WORK_DIR=/work/cloudfront_s3
 ```
 
 ```sh
-$ docker-compose run --rm -w $WORK_DIR terraform init
-$ docker-compose run --rm -w $WORK_DIR terraform plan
-$ docker-compose run --rm -w $WORK_DIR terraform apply
+$ docker-compose run --rm -w $WORK_DIR terraform init -var-file env/stg.tfvars
+$ docker-compose run --rm -w $WORK_DIR terraform plan -var-file env/stg.tfvars
+$ docker-compose run --rm -w $WORK_DIR terraform apply -var-file env/stg.tfvars
 ```
 
 ```sh
