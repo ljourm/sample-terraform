@@ -7,11 +7,6 @@ resource "aws_cloudfront_origin_access_control" "oac" {
 }
 
 resource "aws_cloudfront_distribution" "cloudfront_distribution" {
-  tags = {
-    Project     = var.project
-    Environment = var.environment
-  }
-
   origin {
     domain_name              = var.domain_name
     origin_id                = var.s3_bucket_id
