@@ -1,3 +1,5 @@
 project     = "ljourm-test"
 environment = "prd"
 domain      = "example.com"
+email_from  = ""
+email_to    = ""

@@ -1,0 +1,6 @@
+Hello {{ name }},
+
+Welcome to our service. We are excited to have you with us.
+
+Regards,
+The Team

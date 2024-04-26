@@ -19,3 +19,8 @@ services:
     volumes:
       - ./:/work
     working_dir: /work
+  python:
+    image: python:3.12
+    volumes:
+      - ./:/work
+    working_dir: /work

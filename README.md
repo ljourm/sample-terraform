@@ -27,3 +27,9 @@ $ docker-compose run --rm pike scan -d $WORK_DIR
 ```sh
 $ docker-compose run --rm tflint --recursive
 ```
+
+### lambda pip
+
+```sh
+$ docker-compose run --rm -w /work python sh ./lambda_pip.sh
+```
