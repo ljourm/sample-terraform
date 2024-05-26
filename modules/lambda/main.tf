@@ -12,6 +12,25 @@ data "aws_iam_policy_document" "assume_role" {
   }
 }
 
+data "aws_iam_policy_document" "allow_ses_send_email_policy" {
+  statement {
+    actions = [
+      "ses:SendEmail"
+    ]
+    resources = [
+      "arn:aws:ses:*:*:identity/${var.email_from}",
+      "arn:aws:ses:*:*:configuration-set/first-setting"
+    ]
+    condition {
+      test = "StringLike"
+      variable = "ses:FromAddress"
+      values = [
+        var.email_from
+      ]
+    }
+  }
+}
+
 resource "aws_iam_role" "lambda_role" {
   name = "${var.project}-${var.environment}-lambda"
   assume_role_policy = data.aws_iam_policy_document.assume_role.json
@@ -22,10 +41,10 @@ resource "aws_iam_role_policy_attachment" "lambda_role_attachement" {
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
 }
 
-resource "aws_iam_role_policy" "lambda_inline_policy" {
-  name = "${var.project}-${var.environment}-lambda-policy"
+resource "aws_iam_role_policy" "ses_policy_attachement" {
+  name = "allow_ses_send_email_policy"
   role = aws_iam_role.lambda_role.name
-  policy = file("${path.module}/iam_policy.json")
+  policy = data.aws_iam_policy_document.allow_ses_send_email_policy.json
 }
 
 # ---- Lambda layer ----
