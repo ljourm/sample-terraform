@@ -15,6 +15,16 @@ logger.setLevel(logging.INFO)
 def lambda_handler(event, context):
     # リクエスト情報のログ出力
     logger.info("Received event: %s", json.dumps(event))
+    logger.info("Received context: %s", json.dumps(context, default=str))
+
+    http_method = event['requestContext']['http']['method']
+    path = event['requestContext']['http']['path']
+
+    if http_method != 'POST' or path != '/api/inquiries':
+        return {
+            'statusCode': 403,
+            'body': { 'message': 'Forbidden' }
+        }
 
     # API GatewayからのPOSTリクエストボディを取得
     try:
@@ -24,7 +34,7 @@ def lambda_handler(event, context):
         logger.error("Invalid request body or missing name parameter: %s", str(e))
         return {
             'statusCode': 400,
-            'body': 'Invalid request body or missing name parameter'
+            'body': { 'message': 'Invalid request body or missing name parameter' }
         }
 
     # 環境変数からメールアドレスを取得
@@ -63,11 +73,11 @@ def lambda_handler(event, context):
         logger.info("Email sent successfully: %s", response)
         return {
             'statusCode': 200,
-            'body': f"Email sent successfully: {response}"
+            'body': { 'message': f"Email sent successfully: {response}" }
         }
     except ClientError as e:
         logger.error("Failed to send email: %s", e.response['Error']['Message'])
         return {
             'statusCode': 500,
-            'body': f"Failed to send email: {e.response['Error']['Message']}"
+            'body': { 'message': f"Failed to send email: {e.response['Error']['Message']}" }
         }
