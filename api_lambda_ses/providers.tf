@@ -18,3 +18,7 @@ provider "aws" {
     }
   }
 }
+
+provider "awscc" {
+  region = var.region
+}

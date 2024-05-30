@@ -26,3 +26,7 @@ variable "email_to" {
   type = string
   description = "Email address to send to"
 }
+
+variable "slack_channel_id" {
+  type = string
+}

@@ -19,3 +19,11 @@ module "samle_lambda" {
   email_from = var.email_from
   email_to = var.email_to
 }
+
+module "sample_chatbot_configuration" {
+  source = "./modules/chatbot"
+
+  project = var.project
+  environment = var.environment
+  channel_id = var.slack_channel_id
+}
