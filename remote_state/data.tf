@@ -3,7 +3,7 @@ data "terraform_remote_state" "secret_manager" {
 
   config = {
     bucket = "ljourm-test-common-bucket"
-    key    = "secret_manager.tfstate"
+    key    = "${var.environment}/secret_manager.tfstate"
     region = "ap-northeast-1"
   }
 }
