@@ -1,3 +1,11 @@
+data "aws_secretsmanager_secret_version" "secret" {
+  secret_id = data.terraform_remote_state.remote_state.outputs.remote_state.secret_manager.id
+}
+
+locals {
+  credentials = jsondecode(data.aws_secretsmanager_secret_version.secret.secret_string)
+}
+
 module "sample_ses" {
   source = "./modules/ses"
 
@@ -16,8 +24,8 @@ module "samle_lambda" {
 
   project = var.project
   environment = var.environment
-  email_from = var.email_from
-  email_to = var.email_to
+  email_from = local.credentials["ses_from_address"]
+  email_to = local.credentials["ses_to_address"]
 }
 
 module "sample_chatbot_configuration" {

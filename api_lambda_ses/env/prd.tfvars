@@ -1,6 +1,4 @@
 project          = "ljourm-test"
 environment      = "prd"
 domain           = "example.com"
-email_from       = ""
-email_to         = ""
 slack_channel_id = ""
