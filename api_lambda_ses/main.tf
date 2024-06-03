@@ -27,11 +27,3 @@ module "samle_lambda" {
   email_from = local.credentials["ses_from_address"]
   email_to = local.credentials["ses_to_address"]
 }
-
-module "sample_chatbot_configuration" {
-  source = "./modules/chatbot"
-
-  project = var.project
-  environment = var.environment
-  channel_id = var.slack_channel_id
-}

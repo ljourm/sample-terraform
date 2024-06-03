@@ -16,7 +16,3 @@ variable "domain" {
   type = string
   description = "e.g. example.com"
 }
-
-variable "slack_channel_id" {
-  type = string
-}
