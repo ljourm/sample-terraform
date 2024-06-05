@@ -14,3 +14,7 @@ variable "workspace_id" {
 variable "channel_id" {
   type = string
 }
+
+variable "sns_topic_arns" {
+  type = list(string)
+}

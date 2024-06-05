@@ -7,4 +7,5 @@ resource "awscc_chatbot_slack_channel_configuration" "chatbot_configuration" {
   guardrail_policies = [
     aws_iam_policy.guardrail_policy.arn
   ]
+  sns_topic_arns     = var.sns_topic_arns
 }
