@@ -21,3 +21,12 @@ module "lambda" {
   project = var.project
   environment = var.environment
 }
+
+module "cloudwatch_alarm" {
+  source = "./modules/cloudwatch_alarm"
+
+  project = var.project
+  environment = var.environment
+  function_name = module.lambda.function_name
+  alarm_actions = [module.sns.arn]
+}
