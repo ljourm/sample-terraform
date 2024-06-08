@@ -23,6 +23,20 @@ data "aws_iam_policy_document" "allow_for_chatbot" {
       "*"
     ]
   }
+  statement {
+    actions = [
+      "logs:Describe*",
+      "logs:Get*",
+      "logs:List*",
+      "logs:StartQuery",
+      "logs:StopQuery",
+      "logs:TestMetricFilter",
+      "logs:FilterLogEvents"
+    ]
+    resources = [
+      "*"
+    ]
+  }
 }
 
 resource "aws_iam_role" "chatbot_role" {
@@ -40,12 +54,27 @@ resource "aws_iam_role_policy" "chatbot_role_policy" {
 data "aws_iam_policy_document" "guardrail_policy" {
   statement {
     actions = [
-      "*"
+      "cloudwatch:Describe*",
+      "cloudwatch:Get*",
+      "cloudwatch:List*"
     ]
     resources = [
       "*"
     ]
-    effect = "Deny"
+  }
+  statement {
+    actions = [
+      "logs:Describe*",
+      "logs:Get*",
+      "logs:List*",
+      "logs:StartQuery",
+      "logs:StopQuery",
+      "logs:TestMetricFilter",
+      "logs:FilterLogEvents"
+    ]
+    resources = [
+      "*"
+    ]
   }
 }
 
