@@ -30,10 +30,17 @@ resource "aws_lambda_function" "lambda_function" {
   architectures    = ["arm64"]
   layers           = [aws_lambda_layer_version.lambda_layer.arn]
 
+  reserved_concurrent_executions = 1
+
   environment {
     variables = {
       ENV = var.environment,
       SLACK_BOT_TOKEN = var.slack_bot_token
     }
   }
+}
+
+resource "aws_lambda_function_event_invoke_config" "lambda_config" {
+  function_name          = aws_lambda_function.lambda_function.function_name
+  maximum_retry_attempts = 0
 }
