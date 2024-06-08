@@ -20,6 +20,7 @@ module "lambda" {
 
   project = var.project
   environment = var.environment
+  slack_bot_token = var.slack_bot_token
 }
 
 module "cloudwatch_alarm" {

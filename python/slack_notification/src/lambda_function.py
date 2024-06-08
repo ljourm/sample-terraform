@@ -2,6 +2,8 @@ import os
 import json
 import logging
 from jinja2 import Template
+from slack_sdk import WebClient
+from slack_sdk.errors import SlackApiError
 
 # ロガーの設定
 logger = logging.getLogger()
@@ -22,9 +24,16 @@ def lambda_handler(event, context):
     template = Template(template_content)
     body = template.render(name='sample')
 
-    logger.info("body: %s", body)
+    client = WebClient(token=os.environ['SLACK_BOT_TOKEN'])
 
-    return {
-        "statusCode": 200,
-        "body": body
-    }
+    try:
+        response = client.chat_postMessage(channel='#aws-notification', text=body)
+
+        logger.info(f"Message sent successfully: {response}")
+
+        return {
+            "statusCode": 200,
+            "body": body
+        }
+    except SlackApiError as e:
+        logger.error(f"Received an error: {e}")

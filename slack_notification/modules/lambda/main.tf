@@ -33,6 +33,7 @@ resource "aws_lambda_function" "lambda_function" {
   environment {
     variables = {
       ENV = var.environment,
+      SLACK_BOT_TOKEN = var.slack_bot_token
     }
   }
 }

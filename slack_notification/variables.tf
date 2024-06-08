@@ -19,3 +19,8 @@ variable "slack_workspace_id" {
 variable "slack_channel_id" {
   type = string
 }
+
+variable "slack_bot_token" {
+  type = string
+  description = "e.g. xoxb-oooo-oooo"
+}
