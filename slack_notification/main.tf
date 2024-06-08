@@ -14,3 +14,10 @@ module "chatbot" {
   channel_id = var.slack_channel_id
   sns_topic_arns = [module.sns.arn]
 }
+
+module "lambda" {
+  source = "./modules/lambda"
+
+  project = var.project
+  environment = var.environment
+}
