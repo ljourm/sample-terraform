@@ -24,3 +24,8 @@ services:
     volumes:
       - ./:/work
     working_dir: /work
+  docs:
+    image: quay.io/terraform-docs/terraform-docs
+    volumes:
+      - ./:/work
+    working_dir: /work
