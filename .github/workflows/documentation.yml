@@ -1,0 +1,22 @@
+# see: https://terraform-docs.io/how-to/github-action/
+name: Generate terraform docs
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  docs:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Render terraform docs and push changes back to PR
+        uses: terraform-docs/gh-actions@main
+        with:
+          working-dir: api_lambda_ses,cloudfront_s3,common_bucket,remote_state,secret_manager,slack_notification
+          output-file: README.md
+          git-push: true
